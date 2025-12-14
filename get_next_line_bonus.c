@@ -6,7 +6,7 @@
 /*   By: yuriiartymicloud.com <yuriiartymicloud.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:03:21 by yuriiartymi       #+#    #+#             */
-/*   Updated: 2025/11/17 12:09:58 by yuriiartymi      ###   ########.fr       */
+/*   Updated: 2025/12/14 08:33:27 by yuriiartymi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ char	*get_next_line(int fd)
 
 	if (fd < 0)
 		return (NULL);
-	if (buffer[0] == 0)
-		read(fd, buffer, BUFFER_SIZE);
+	if (buffer[fd][0] == 0)
+		read(fd, buffer[fd], BUFFER_SIZE);
 	line = "";
 	line_len = 1;
 	while (line[line_len - 1] != '\n')
 	{
-		line = update_buffer(fd, buffer, line);
+		line = update_buffer(fd, buffer[fd], line);
 		if (!line)
 			break ;
 		line_len = ft_strlen(line);

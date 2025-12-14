@@ -1,0 +1,17 @@
+NAME = main
+OFLAGS = -Wall -Wextra -Werror
+CC = cc
+RM = rm -f
+
+SRCS = get_next_line.c get_next_line_utils.c main.c
+		
+BONUS = get_next_line_bonus.c get_next_line_utils_bonus.c main.c 
+
+m: ${OBJS}
+	${CC} ${OFLAGS} $^ -o ${NAME} 
+
+b: ${OBJS_B}
+	${CC} ${OFLAGS} $^ -o ${NAME} 
+
+clean:
+	${RM} main

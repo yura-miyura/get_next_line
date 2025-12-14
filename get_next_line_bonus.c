@@ -6,7 +6,7 @@
 /*   By: yuriiartymicloud.com <yuriiartymicloud.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:03:21 by yuriiartymi       #+#    #+#             */
-/*   Updated: 2025/12/14 08:33:27 by yuriiartymi      ###   ########.fr       */
+/*   Updated: 2025/12/14 09:27:31 by yuriiartymi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*update_buffer(int fd, char buffer[BUFFER_SIZE], char *line)
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[ARG_MAX][BUFFER_SIZE];
+	static char	buffer[OPEN_MAX][BUFFER_SIZE];
 	char		*line;
 	size_t		line_len;
 

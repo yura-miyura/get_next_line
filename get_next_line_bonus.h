@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bounus.h                             :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuriiartymicloud.com <yuriiartymicloud.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:09:34 by yuriiartymi       #+#    #+#             */
-/*   Updated: 2025/11/17 12:03:56 by yuriiartymi      ###   ########.fr       */
+/*   Updated: 2025/12/14 09:27:08 by yuriiartymi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 1024
+# endif
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42

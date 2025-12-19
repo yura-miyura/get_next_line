@@ -6,7 +6,7 @@
 /*   By: yuriiartymicloud.com <yuriiartymicloud.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:10:54 by yuriiartymi       #+#    #+#             */
-/*   Updated: 2025/11/14 13:11:18 by yuriiartymi      ###   ########.fr       */
+/*   Updated: 2025/12/14 20:43:03by yuriiartymi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ void	ft_bzero(void *s, size_t n)
 			s_tmp[n] = 0;
 }
 
-int	ft_indexof(char *str)
+int	ft_indexof(char buffer[BUFFER_SIZE])
 {
 	int	i;
 
 	i = 0;
-	while (str[i] && str[i] != '\n' && i < BUFFER_SIZE - 1)
+	while (buffer[i] && buffer[i] != '\n' && i < BUFFER_SIZE - 1)
 		i++;
 	return (i);
 }

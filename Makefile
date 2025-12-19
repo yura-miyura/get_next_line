@@ -1,5 +1,5 @@
 NAME = main
-OFLAGS = -Wall -Wextra -Werror
+OFLAGS = -Wall -Wextra -Werror -g3
 CC = cc
 RM = rm -f
 

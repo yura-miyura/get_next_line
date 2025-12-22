@@ -27,40 +27,30 @@ char	*ft_strrchr(const char *s, int c)
 	return (NULL);
 }
 
-
-static char	*update_buffer(int fd, char buffer[BUFFER_SIZE], char *line)
-{
-	int		i;
-	size_t	bytes;
-	ssize_t	new_content;
-	char	*new_line;
-
-	if (!buffer[0])
-		new_content = read(fd, buffer, BUFFER_SIZE);
-	i = ft_indexof(buffer);
-	new_line = ft_strbufjoin(line, buffer, i);
-	bytes = BUFFER_SIZE - i - 1;
-	ft_memmove(buffer, buffer + i + 1, bytes);
-	ft_bzero(buffer + bytes, i + 1);
-	new_content = read(fd, buffer + bytes, i + 1);
-	if (new_content < 0 || !new_line[0])
-		return (NULL);
-	return (new_line);
-}
-
 char	*get_next_line(int fd)
 {
 	static char	buffer[BUFFER_SIZE];
 	char		*line;
+	int			bytes;
+	int			i;
 
 	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
 	line = "";
-	while (!ft_strrchr(line, '\n'))
+	bytes = -1;
+	while (bytes != 0 && !ft_strrchr(line, '\n'))
 	{
-		line = update_buffer(fd, buffer, line);
-		if (!line || !buffer[0])
-			break ;
+		if (buffer[0] == 0)
+			bytes = read(fd, buffer, BUFFER_SIZE);
+		i = ft_indexof(buffer);
+		if (buffer[i] == '\0')
+			bytes = read(fd, buffer + i, BUFFER_SIZE - i);
+		i = ft_indexof(buffer);
+		line = ft_strbufjoin(line, buffer, i);
+		ft_memmove(buffer, buffer + i + 1, BUFFER_SIZE - i - 1);
+		ft_bzero(buffer + BUFFER_SIZE -  i - 1,  i + 1);
 	}
+	if (!line[0])
+		return (NULL);
 	return (line);
 }

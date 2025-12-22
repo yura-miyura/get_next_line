@@ -49,7 +49,7 @@ int	ft_indexof(char buffer[BUFFER_SIZE])
 	int	i;
 
 	i = 0;
-	while (buffer[i] && buffer[i] != '\n' && i < BUFFER_SIZE - 1)
+	while (i < BUFFER_SIZE - 1 && buffer[i] && buffer[i] != '\n')
 		i++;
 	return (i);
 }

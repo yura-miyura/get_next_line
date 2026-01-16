@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuriiartymicloud.com <yuriiartymicloud.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/14 13:10:54 by yuriiartymi       #+#    #+#             */
-/*   Updated: 2025/12/14 20:43:03by yuriiartymi      ###   ########.fr       */
+/*   Created: 2026/01/14 12:59:35 by yuriiartymi       #+#    #+#             */
+/*   Updated: 2026/01/14 12:59:54 by yuriiartymi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

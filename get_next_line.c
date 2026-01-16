@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuriiartymicloud.com <yuriiartymicloud.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/14 13:03:21 by yuriiartymi       #+#    #+#             */
-/*   Updated: 2025/12/14 20:29:52y yuriiartymi      ###   ########.fr       */
+/*   Created: 2026/01/14 13:00:34 by yuriiartymi       #+#    #+#             */
+/*   Updated: 2026/01/14 13:00:46 by yuriiartymi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ char	*get_next_line(int fd)
 	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
 	line = "";
-	bytes = -1;
-	while (bytes != 0 && !ft_strrchr(line, '\n'))
+	bytes = 1;
+	while (bytes > 0 && !ft_strrchr(line, '\n'))
 	{
 		if (buffer[0] == 0)
 			bytes = read(fd, buffer, BUFFER_SIZE);
@@ -48,7 +48,7 @@ char	*get_next_line(int fd)
 		i = ft_indexof(buffer);
 		line = ft_strbufjoin(line, buffer, i);
 		ft_memmove(buffer, buffer + i + 1, BUFFER_SIZE - i - 1);
-		ft_bzero(buffer + BUFFER_SIZE -  i - 1,  i + 1);
+		ft_bzero(buffer + BUFFER_SIZE - i - 1, i + 1);
 	}
 	if (!line[0])
 		return (NULL);

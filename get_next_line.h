@@ -6,28 +6,32 @@
 /*   By: yuriiartymicloud.com <yuriiartymicloud.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:09:34 by yuriiartymi       #+#    #+#             */
-/*   Updated: 2025/12/22 21:25:34 by yuriiartymi      ###   ########.fr       */
+/*   Updated: 2025/12/22 19:28:53 by yuriiartymi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#define GET_NEXT_LINE_H
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <limits.h>
+#include <limits.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+#ifndef OPEN_MAX
+#define OPEN_MAX 1024
+#endif
 
-void	*ft_memmove(void *dst, const void *src, size_t size);
-void	ft_bzero(void *s, size_t n);
-int		ft_indexof(char *str);
-char	*ft_strbufjoin(char const *s, char BUFFER[BUFFER_SIZE], int i);
-char	*get_next_line(int fd);
-char	*ft_strrchr(const char *s, int c);
-size_t	ft_strlen(const char *s);
-char	*ft_strrchr(const char *s, int c);
+#ifndef BUFFER_SIZE
+#define BUFFER_SIZE 42
+#endif
+
+char *ft_substr(char const *s, unsigned int start, size_t len);
+char *ft_strjoin(char const *s1, char const *s2);
+void *ft_memmove(void *dst, const void *src, size_t size);
+void ft_bzero(void *s, size_t n);
+int ft_indexof(char *buffer);
+char *get_next_line(int fd);
+char *ft_strrchr(const char *s, int c);
+size_t ft_strlen(const char *s);
 
 #endif

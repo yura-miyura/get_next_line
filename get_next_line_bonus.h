@@ -6,7 +6,7 @@
 /*   By: yuriiartymicloud.com <yuriiartymicloud.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:09:34 by yuriiartymi       #+#    #+#             */
-/*   Updated: 2025/12/22 21:25:26 by yuriiartymi      ###   ########.fr       */
+/*   Updated: 2025/12/14 09:27:08 by yuriiartymi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ int		ft_indexof(char *str);
 char	*ft_strbufjoin(char const *s, char BUFFER[BUFFER_SIZE], int i);
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
-char	*ft_strrchr(const char *s, int c);
 
 #endif

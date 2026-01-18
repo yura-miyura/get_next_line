@@ -114,6 +114,6 @@ char	*get_next_line(int fd)
 	{
 		free(buffer[fd]);
 		buffer[fd] = NULL;
-	}
+	}A
 	return (line);
 }

@@ -1,106 +1,119 @@
-### This project has been created as part of the 42 curriculum by yartym
+### _This project has been created as part of the 42 curriculum by yartym_
 
 ## get_next_line
 
-### `gnl` is a program that recretes basic read-file functionality of cat command 
+### `gnl` is a program that recreates basic read-line functionality of cat command
 
 ## About
-This project aimed to create useful functions within a single static library. It involves recreating various standard C library functions, as well as additional utility functions and linked list manipulation tools.
 
-## List of Functions
+**get_next_line** (GNL) is a programming project that recreates the basic read-line functionality often seen in standard library functions (like `getline` or `fgets`).
 
-### 1. Libc Functions
-Standard C library functions recreated to understand the underlying logic.
+The goal of this project is to create a function that returns a single line from a file descriptor. This requires the use of **static variables** to remember the position in the file and the remaining buffer between function calls.
 
-| Function | Description |
-| :------- | :---------- |
-| `ft_isalpha` | Checks for an alphabetic character. |
-| `ft_isdigit` | Checks for a digit (0 through 9). |
-| `ft_isalnum` | Checks for an alphanumeric character. |
-| `ft_isascii` | Checks whether c fits into the ASCII character set. |
-| `ft_isprint` | Checks for any printable character. |
-| `ft_strlen` | Calculates the length of a string. |
-| `ft_memset` | Fills memory with a constant byte. |
-| `ft_bzero` | Zeroes a byte string. |
-| `ft_memcpy` | Copies memory area. |
-| `ft_memmove` | Copies memory area (handles overlapping). |
-| `ft_strlcpy` | Copies string to a specific size. |
-| `ft_strlcat` | Concatenates string to a specific size. |
-| `ft_toupper` | Converts char to uppercase. |
-| `ft_tolower` | Converts char to lowercase. |
-| `ft_strchr` | Locates character in string (first occurrence). |
-| `ft_strrchr` | Locates character in string (last occurrence). |
-| `ft_strncmp` | Compares two strings. |
-| `ft_memchr` | Scans memory for a character. |
-| `ft_memcmp` | Compares memory areas. |
-| `ft_strnstr` | Locates a substring in a string. |
-| `ft_atoi` | Converts a string to an integer. |
-| `ft_calloc` | Allocates memory and sets its bytes' values to 0. |
-| `ft_strdup` | Creates a duplicate for the string passed as parameter. |
+## Features
 
-### 2. Additional Functions
-Useful utility functions for string manipulation and file output.
+### 1. Mandatory Part
+The mandatory function handles reading from a **single file descriptor** at a time. It manages the buffer efficiently to return exactly one line (terminated by `\n` or EOF).
 
-| Function | Description |
-| :------- | :---------- |
-| `ft_substr` | Returns a substring from a string. |
-| `ft_strjoin` | Concatenates two strings. |
-| `ft_strtrim` | Trims the beginning and end of string with specified set of chars. |
-| `ft_split` | Splits a string using a char as parameter. |
-| `ft_itoa` | Converts a number into a string. |
-| `ft_strmapi` | Applies a function to each character of a string. |
-| `ft_striteri` | Applies a function to each character of a string (by reference). |
-| `ft_putchar_fd` | Outputs a char to a file descriptor. |
-| `ft_putstr_fd` | Outputs a string to a file descriptor. |
-| `ft_putendl_fd` | Outputs a string to a file descriptor, followed by a newline. |
-| `ft_putnbr_fd` | Outputs a number to a file descriptor. |
+### 2. Bonus Part
+The bonus implementation can manage **multiple file descriptors** simultaneously. You can alternate reading lines from `fd3`, `fd4`, and `fd5` without losing the reading thread of any file.
 
-### 3. Linked List Functions
-Functions to manipulate linked lists (`t_list`).
-
-| Function | Description |
-| :------- | :---------- |
-| `ft_lstnew` | Creates a new list element. |
-| `ft_lstadd_front` | Adds an element at the beginning of a list. |
-| `ft_lstsize` | Counts the number of elements in a list. |
-| `ft_lstlast` | Returns the last element of the list. |
-| `ft_lstadd_back` | Adds an element at the end of a list. |
-| `ft_lstdelone` | Deletes and frees an element from the list. |
-| `ft_lstclear` | Deletes and frees the given element and every successor. |
-| `ft_lstiter` | Applies a function to the content of all list's elements. |
-| `ft_lstmap` | Applies a function to the content of all list's elements into new list. |
-
-## Installation 
-
-Create static library with Makefile
-
-```bash
-make
-```
 ## Usage
 
-### 1. Include the heade in your C file:
+### 1. Create a Test File
 
-```C
-#include "libft.h"
+You can copy the code below to test the **Mandatory** or **Bonus** versions.
 
-int main(void)
+#### Mandatory Test (`main.c`)
+```c
+#include "get_next_line.h"
+#include <fcntl.h>
+#include <stdio.h>
+
+int main(int ac, char **av)
 {
-    ft_putstr_fd("Hello, Libft!", 1);
+    char    *line;
+    int     fd;
+
+    if (ac == 2)
+    {
+        fd = open(av[1], O_RDONLY);
+        if (fd == -1)
+            return (1);
+
+        line = get_next_line(fd);
+        while (line)
+        {
+            printf("%s", line);
+            free(line);
+            line = get_next_line(fd);
+        }
+        free(line);
+        close(fd);
+    }
     return (0);
 }
 ```
 
-### 2. Compile your project:
+#### Bonus Test (`main_bonus.c`)
+```C
+#include "get_next_line_bonus.h"
+#include <fcntl.h>
+#include <stdio.h>
 
-```bash
-cc <file_name>.c -L. -lft -o <file_name>
+int main(int ac, char **av)
+{
+    char    *line;
+    int     fd;
+    char    *line2;
+    int     fd2;
+
+    if (ac == 3)
+    {
+        fd = open(av[1], O_RDONLY);
+        fd2 = open(av[2], O_RDONLY);
+
+        line = get_next_line(fd);
+        line2 = get_next_line(fd2);
+
+        while (line || line2)
+        {
+            if (line)
+            {
+                printf("FD 1: %s", line);
+                free(line);
+                line = get_next_line(fd);
+            }
+            if (line2)
+            {
+                printf("FD 2: %s", line2);
+                free(line2);
+                line2 = get_next_line(fd2);
+            }
+        }
+        close(fd);
+        close(fd2);
+    }
+    return (0);
+}
 ```
+### 2. Compile
+#### Mandatory:
+```Bash
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c main.c -o gnl
+```
+#### Bonus:
+```Bash
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line_bonus.c get_next_line_utils_bonus.c main_bonus.c -o gnl_bonus
+```
+### 3. Run
+```Bash
+# Run mandatory with one file
+./gnl get_next_line
 
-* `-L.` tells the compiler to look for libraries in the current directory.
-
-* `-lft` links the libft library (the compiler automatically adds the lib prefix and .a suffix).
-
+# Run bonus with two files
+./gnl_bonus get_next_line_bonus.c get_next_line_bonus.c
+```
 ## Resources
 
 1) [CS50](https://www.youtube.com/watch?v=HJP0a6vKvlo&list=PLhQjrBD2T380hlTqAU8HfvVepCcjCqTg6)

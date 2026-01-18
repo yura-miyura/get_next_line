@@ -27,7 +27,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		size = 0;
 	else if (size > len)
 		size = len;
-	substr = malloc(sizeof (char) * (size + 1));
+	substr = malloc(sizeof(char) * (size + 1));
 	if (!substr)
 		return (NULL);
 	i = 0;
@@ -48,7 +48,7 @@ char	*ft_strrchr(const char *s, int c)
 
 	if (!s)
 		return (NULL);
-	loc = (char *) s;
+	loc = (char *)s;
 	cc = c;
 	i = ft_strlen(loc) + 1;
 	while (i > 0)

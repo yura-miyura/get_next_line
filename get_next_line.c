@@ -78,8 +78,8 @@ char	*get_next_line(int fd)
 {
 	static char	buffer[BUFFER_SIZE + 1] = {0};
 	char		*line;
-	int			i;
 	int			bytes;
+	int			i;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);

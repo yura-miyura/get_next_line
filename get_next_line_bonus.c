@@ -6,48 +6,93 @@
 /*   By: yuriiartymicloud.com <yuriiartymicloud.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:03:21 by yuriiartymi       #+#    #+#             */
-/*   Updated: 2025/12/14 09:27:31 by yuriiartymi      ###   ########.fr       */
+/*   Updated: 2026/01/17 20:16:38 by yuriiartymi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static char	*update_buffer(int fd, char buffer[BUFFER_SIZE], char *line)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*substr;
+	size_t	s_len;
+	size_t	size;
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	s_len = ft_strlen(s);
+	size = s_len - start;
+	if (start > s_len)
+		size = 0;
+	else if (size > len)
+		size = len;
+	substr = malloc(sizeof (char) * (size + 1));
+	if (!substr)
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		substr[i] = s[start + i];
+		i++;
+	}
+	substr[i] = '\0';
+	return (substr);
+}
+
+char	*ft_strrchr(const char *s, int c)
+{
+	char			*loc;
+	unsigned char	cc;
+	size_t			i;
+
+  if (!s)
+    return (NULL);
+	loc = (char *) s;
+	cc = c;
+	i = ft_strlen(loc) + 1;
+	while (i > 0)
+		if (*(loc + --i) == cc)
+			return (loc + i);
+	return (NULL);
+}
+
+char	*ft_new_line(char *line, char *buffer)
 {
 	int		i;
-	char	*new_line;
-	size_t	bytes;
-	ssize_t	new_content;
+	char	*tmp;
+	char	*sub_line;
 
 	i = ft_indexof(buffer);
-	new_line = ft_strbufjoin(line, buffer, i);
-	bytes = BUFFER_SIZE - i - 1;
-	ft_memmove(buffer, buffer + i + 1, bytes);
-	ft_bzero(buffer + bytes, i + 1);
-	new_content = read(fd, buffer + bytes, i + 1);
-	if (!new_content && !new_line[0])
-		return (NULL);
-	return (new_line);
+	tmp = line;
+	sub_line = ft_substr(buffer, 0, i + 1);
+	line = ft_strjoin(tmp, sub_line);
+	free(sub_line);
+	free(tmp);
+	ft_memmove(buffer, buffer + i + 1, BUFFER_SIZE - i);
+	ft_bzero(buffer + BUFFER_SIZE - i - 1, i + 1);
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[OPEN_MAX][BUFFER_SIZE];
+	static char	buffer[BUFFER_SIZE + 1] = {0};
 	char		*line;
-	size_t		line_len;
+	int			i;
+	int 		bytes;
 
-	if (fd < 0)
+	if(fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (buffer[fd][0] == 0)
-		read(fd, buffer[fd], BUFFER_SIZE);
-	line = "";
-	line_len = 1;
-	while (line[line_len - 1] != '\n')
+	bytes = 1;
+	if (!buffer[0])
+		bytes = read(fd, buffer, BUFFER_SIZE);
+	line = NULL;
+	while (bytes > 0 && !ft_strrchr(line, '\n'))
 	{
-		line = update_buffer(fd, buffer[fd], line);
-		if (!line)
-			break ;
-		line_len = ft_strlen(line);
+		i = ft_indexof(buffer);
+		if (!buffer[i])
+			bytes = read(fd, buffer + i, BUFFER_SIZE - i);
+		line = ft_new_line(line, buffer);
 	}
 	return (line);
 }

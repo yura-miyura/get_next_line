@@ -12,7 +12,8 @@
 
 #include "get_next_line.h"
 
-void *ft_memmove(void *dest, const void *src, size_t n) {
+void *ft_memmove(void *dest, const void *src, size_t n)
+{
   unsigned char *tmp_dest;
   const unsigned char *tmp_src;
 
@@ -23,7 +24,8 @@ void *ft_memmove(void *dest, const void *src, size_t n) {
   if (tmp_dest <= tmp_src)
     while (n--)
       *tmp_dest++ = *tmp_src++;
-  else {
+  else
+  {
     tmp_dest += n;
     tmp_src += n;
     while (n--)
@@ -32,7 +34,8 @@ void *ft_memmove(void *dest, const void *src, size_t n) {
   return (dest);
 }
 
-void ft_bzero(void *s, size_t n) {
+void ft_bzero(void *s, size_t n)
+{
   char *s_tmp;
 
   s_tmp = s;
@@ -41,7 +44,8 @@ void ft_bzero(void *s, size_t n) {
       s_tmp[n] = 0;
 }
 
-int ft_indexof(char *buffer) {
+int ft_indexof(char *buffer)
+{
   int i;
 
   i = 0;
@@ -50,7 +54,8 @@ int ft_indexof(char *buffer) {
   return (i);
 }
 
-size_t ft_strlen(const char *s) {
+size_t ft_strlen(const char *s)
+{
   size_t length;
 
   length = 0;
@@ -59,7 +64,8 @@ size_t ft_strlen(const char *s) {
   return (length);
 }
 
-char *ft_strjoin(char const *s1, char const *s2) {
+char *ft_strjoin(char const *s1, char const *s2)
+{
   char *new_str;
   size_t size;
   int s1_len;
@@ -78,7 +84,8 @@ char *ft_strjoin(char const *s1, char const *s2) {
   if (!new_str)
     return (NULL);
   new_str[size] = '\0';
-  while (size-- > 0) {
+  while (size-- > 0)
+  {
     if (s2_len-- > 0)
       new_str[size] = s2[s2_len];
     else if (s1_len-- > 0)

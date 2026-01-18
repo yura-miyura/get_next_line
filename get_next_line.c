@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuriiartymicloud.com <yuriiartymicloud.    +#+  +:+       +#+        */
+/*   By: yartym <yartym@student.42.fr>              #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/14 13:03:21 by yuriiartymi       #+#    #+#             */
-/*   Updated: 2025/12/14 20:29:52y yuriiartymi      ###   ########.fr       */
+/*   Created: 2026-01-18 10:08:18 by yartym            #+#    #+#             */
+/*   Updated: 2026-01-18 10:08:18 by yartym           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ char	*ft_strrchr(const char *s, int c)
 	unsigned char	cc;
 	size_t			i;
 
-  if (!s)
-    return (NULL);
+	if (!s)
+		return (NULL);
 	loc = (char *) s;
 	cc = c;
 	i = ft_strlen(loc) + 1;
@@ -79,13 +79,11 @@ char	*get_next_line(int fd)
 	static char	buffer[BUFFER_SIZE + 1] = {0};
 	char		*line;
 	int			i;
-	int 		bytes;
+	int			bytes;
 
-	if(fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	bytes = 1;
-	if (!buffer[0])
-		bytes = read(fd, buffer, BUFFER_SIZE);
 	line = NULL;
 	while (bytes > 0 && !ft_strrchr(line, '\n'))
 	{

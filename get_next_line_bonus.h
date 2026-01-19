@@ -11,28 +11,28 @@
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_BONUS_H
-#define GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
-#include <limits.h>
-#include <stdlib.h>
-#include <unistd.h>
+# include <limits.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-#ifndef OPEN_MAX
-#define OPEN_MAX 1024
-#endif
+# ifndef OPEN_MAX
+#  define OPEN_MAX 1024
+# endif
 
-#ifndef BUFFER_SIZE
-#define BUFFER_SIZE 42
-#endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
-char *ft_substr(char const *s, unsigned int start, size_t len);
-char *ft_strjoin(char const *s1, char const *s2);
-void *ft_memmove(void *dst, const void *src, size_t size);
-void ft_bzero(void *s, size_t n);
-int ft_indexof_nl(char *buffer);
-char *get_next_line(int fd);
-char *ft_strrchr(const char *s, int c);
-size_t ft_strlen(const char *s);
-void *ft_calloc(size_t count, size_t size);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strjoin(char const *s1, char const *s2);
+void	*ft_memmove(void *dst, const void *src, size_t size);
+void	ft_bzero(void *s, size_t n);
+int		ft_indexof_nl(char *buffer);
+char	*get_next_line(int fd);
+char	*ft_strrchr(const char *s, int c);
+size_t	ft_strlen(const char *s);
+void	*ft_calloc(size_t count, size_t size);
 
 #endif

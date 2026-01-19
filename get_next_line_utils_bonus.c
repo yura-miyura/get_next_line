@@ -44,7 +44,7 @@ void	ft_bzero(void *s, size_t n)
 			s_tmp[n] = 0;
 }
 
-int	ft_indexof(char *buffer)
+int	ft_indexof_nl(char *buffer)
 {
 	int	i;
 

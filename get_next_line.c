@@ -63,7 +63,7 @@ char	*ft_new_line(char *line, char *buffer)
 	char	*tmp;
 	char	*sub_line;
 
-	i = ft_indexof(buffer);
+	i = ft_indexof_nl(buffer);
 	tmp = line;
 	sub_line = ft_substr(buffer, 0, i + 1);
 	line = ft_strjoin(tmp, sub_line);
@@ -87,7 +87,7 @@ char	*get_next_line(int fd)
 	line = NULL;
 	while (bytes > 0 && !ft_strrchr(line, '\n'))
 	{
-		i = ft_indexof(buffer);
+		i = ft_indexof_nl(buffer);
 		if (!buffer[i])
 			bytes = read(fd, buffer + i, BUFFER_SIZE - i);
 		line = ft_new_line(line, buffer);

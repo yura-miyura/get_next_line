@@ -12,12 +12,12 @@
 
 #include "get_next_line.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char *ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*substr;
-	size_t	s_len;
-	size_t	size;
-	size_t	i;
+	char *substr;
+	size_t s_len;
+	size_t size;
+	size_t i;
 
 	if (!s)
 		return (NULL);
@@ -31,8 +31,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!substr)
 		return (NULL);
 	i = 0;
-	while (i < size)
-	{
+	while (i < size) {
 		substr[i] = s[start + i];
 		i++;
 	}
@@ -40,11 +39,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (substr);
 }
 
-char	*ft_strrchr(const char *s, int c)
+char *ft_strrchr(const char *s, int c)
 {
-	char			*loc;
-	unsigned char	cc;
-	size_t			i;
+	char *loc; unsigned char cc;
+	size_t i;
 
 	if (!s)
 		return (NULL);
@@ -57,11 +55,11 @@ char	*ft_strrchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_new_line(char *line, char *buffer)
+char *ft_new_line(char *line, char *buffer)
 {
-	int		i;
-	char	*tmp;
-	char	*sub_line;
+	int i;
+	char *tmp;
+	char *sub_line;
 
 	i = ft_indexof_nl(buffer);
 	tmp = line;
@@ -74,22 +72,19 @@ char	*ft_new_line(char *line, char *buffer)
 	return (line);
 }
 
-char	*get_next_line(int fd)
+char *get_next_line(int fd)
 {
-	static char	buffer[BUFFER_SIZE + 1] = {0};
-	char		*line;
-	int			bytes;
-	int			i;
+	static char buffer[BUFFER_SIZE + 1] = {0};
+	char *line;
+	int bytes;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	bytes = 1;
 	line = NULL;
-	while (bytes > 0 && !ft_strrchr(line, '\n'))
-	{
-		i = ft_indexof_nl(buffer);
-		if (!buffer[i])
-			bytes = read(fd, buffer + i, BUFFER_SIZE - i);
+	while (bytes > 0 && !ft_strrchr(line, '\n')) {
+		if (!buffer[0])
+			bytes = read(fd, buffer, BUFFER_SIZE);
 		line = ft_new_line(line, buffer);
 	}
 	return (line);

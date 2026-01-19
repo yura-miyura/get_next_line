@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yartym <yartym@student.42.fr>              #+#  +:+       +#+        */
+/*   By: yuriiartymicloud.com <yuriiartymicloud.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-01-18 13:41:54 by yartym            #+#    #+#             */
-/*   Updated: 2026-01-18 13:41:54 by yartym           ###   ########.fr       */
+/*   Created: 2026/01/18 13:41:54 by yartym            #+#    #+#             */
+/*   Updated: 2026/01/19 14:51:30 by yuriiartymi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,6 @@ char	*ft_strrchr(const char *s, int c)
 	return (NULL);
 }
 
-void	*ft_calloc(size_t count, size_t size)
-{
-	void	*memory;
-
-	if ((size != 0 && count > (__SIZE_MAX__ / size)))
-		return (NULL);
-	memory = malloc(count * size);
-	if (!memory)
-	{
-		free(memory);
-		return (NULL);
-	}
-	ft_bzero(memory, count * size);
-	return (memory);
-}
-
 char	*ft_new_line(char *line, char *buffer)
 {
 	int		i;
@@ -92,28 +76,19 @@ char	*ft_new_line(char *line, char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer[OPEN_MAX];
+	static char	buffer[OPEN_MAX][BUFFER_SIZE + 1] = {0};
 	char		*line;
-	int			i;
 	int			bytes;
 
 	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!buffer[fd])
-		buffer[fd] = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	bytes = 1;
 	line = NULL;
 	while (bytes > 0 && !ft_strrchr(line, '\n'))
 	{
-		i = ft_indexof_nl(buffer[fd]);
-		if (!buffer[fd][i])
-			bytes = read(fd, buffer[fd] + i, BUFFER_SIZE - i);
+		if (!buffer[fd][0])
+			bytes = read(fd, buffer[fd], BUFFER_SIZE);
 		line = ft_new_line(line, buffer[fd]);
-	}
-	if (!line || bytes < 0)
-	{
-		free(buffer[fd]);
-		buffer[fd] = NULL;
 	}
 	return (line);
 }

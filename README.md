@@ -1,14 +1,24 @@
 ### _This project has been created as part of the 42 curriculum by yartym_
 
-## get_next_line
+## get_next_line (gnl)
 
-### `gnl` is a program that recreates basic read-line functionality of cat command
+### **GNL** is a programming project that recreates the basic read-line functionality often seen in standard library functions (like `getline` or `fgets`).
+
 
 ## About
 
-**get_next_line** (GNL) is a programming project that recreates the basic read-line functionality often seen in standard library functions (like `getline` or `fgets`).
-
 The goal of this project is to create a function that returns a single line from a file descriptor. This requires the use of **static variables** to remember the position in the file and the remaining buffer between function calls.
+
+## Algorithm Design
+
+### Mandatory Part
+For the mandatory implementation, a **static buffer** (fixed array) is used with static allocation. This approach simplifies the process and eliminates potential memory leaks associated with managing the buffer itself, as the memory is allocated automatically at compile time.
+
+### Bonus Part
+For the bonus implementation, which handles multiple file descriptors, the buffer management is handled differently. An array of pointers is used, and the specific buffer for each file descriptor is allocated using `malloc` only when needed. This ensures **efficient memory usage**, as memory is only consumed for active file descriptors rather than allocating a massive array for all potential file descriptors (`OPEN_MAX`) at once.
+
+### Code Reuse
+Throughout both parts, standard helper functions (recreated from `libft`) are utilized. This demonstrates the ability to **reuse code** and adhere to standard C library behaviors.
 
 ## Features
 
@@ -114,8 +124,9 @@ cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line_bonus.c get_next_line_u
 # Run bonus with two files
 ./gnl_bonus get_next_line_bonus.c get_next_line_bonus.c
 ```
-## Resources
+#### Resources
 
-1) [CS50](https://www.youtube.com/watch?v=HJP0a6vKvlo&list=PLhQjrBD2T380hlTqAU8HfvVepCcjCqTg6)
-2) [man](https://man7.org/)
-3) [google](https://www.google.com/)
+1) [GeelsForGeeks](https://www.geeksforgeeks.org/c/input-output-system-calls-c-create-open-close-read-write/)
+2) [man read](https://man7.org/linux/man-pages/man2/read.2.html)
+3) [man open](https://man7.org/linux/man-pages/man2/open.2.html)
+3) [Gemini](https://gemini.google.com/share/e9be3fde2fa9)

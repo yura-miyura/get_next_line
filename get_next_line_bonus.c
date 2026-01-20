@@ -40,6 +40,26 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (substr);
 }
 
+char	*ft_strchr(const char *s, int c)
+{
+	char			*loc;
+	unsigned char	cc;
+
+	if (!s)
+		return (NULL);
+	loc = (char *) s;
+	cc = c;
+	while (*loc)
+	{
+		if (*loc == cc)
+			return (loc);
+		loc++;
+	}
+	if (*loc == cc)
+		return (loc);
+	return (NULL);
+}
+
 char	*ft_new_line(char *line, char *buffer)
 {
 	int		i;

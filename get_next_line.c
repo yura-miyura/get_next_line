@@ -40,20 +40,23 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (substr);
 }
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	char			*loc;
 	unsigned char	cc;
-	size_t			i;
 
 	if (!s)
 		return (NULL);
-	loc = (char *)s;
+	loc = (char *) s;
 	cc = c;
-	i = ft_strlen(loc) + 1;
-	while (i > 0)
-		if (*(loc + --i) == cc)
-			return (loc + i);
+	while (*loc)
+	{
+		if (*loc == cc)
+			return (loc);
+		loc++;
+	}
+	if (*loc == cc)
+		return (loc);
 	return (NULL);
 }
 

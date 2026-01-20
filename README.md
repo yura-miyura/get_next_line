@@ -11,11 +11,10 @@ The goal of this project is to create a function that returns a single line from
 
 ## Algorithm Design
 
-### Mandatory Part
-For the mandatory implementation, a **static buffer** (fixed array) is used with static allocation. This approach simplifies the process and eliminates potential memory leaks associated with managing the buffer itself, as the memory is allocated automatically at compile time.
+### Memory Management
+The project uses static arrays instead of dynamic allocation (`malloc`) for the internal buffers. This is done to prevent **memory leaks**. 
 
-### Bonus Part
-For the bonus implementation, which handles multiple file descriptors, the buffer management is handled differently. An array of pointers is used, and the specific buffer for each file descriptor is allocated using `malloc` only when needed. This ensures **efficient memory usage**, as memory is only consumed for active file descriptors rather than allocating a massive array for all potential file descriptors (`OPEN_MAX`) at once.
+If we used `malloc` and the user stopped reading a file before the end, the memory would stay allocated with no way to free it. By using static memory, we ensure the program remains leak-free regardless of how many lines are read.
 
 ### Code Reuse
 Throughout both parts, standard helper functions (recreated from `libft`) are utilized. This demonstrates the ability to **reuse code** and adhere to standard C library behaviors.

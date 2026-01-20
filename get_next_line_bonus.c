@@ -40,23 +40,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (substr);
 }
 
-char	*ft_strrchr(const char *s, int c)
-{
-	char			*loc;
-	unsigned char	cc;
-	size_t			i;
-
-	if (!s)
-		return (NULL);
-	loc = (char *)s;
-	cc = c;
-	i = ft_strlen(loc) + 1;
-	while (i > 0)
-		if (*(loc + --i) == cc)
-			return (loc + i);
-	return (NULL);
-}
-
 char	*ft_new_line(char *line, char *buffer)
 {
 	int		i;
@@ -84,7 +67,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	bytes = 1;
 	line = NULL;
-	while (bytes > 0 && !ft_strrchr(line, '\n'))
+	while (bytes > 0 && !ft_strchr(line, '\n'))
 	{
 		if (!buffer[fd][0])
 			bytes = read(fd, buffer[fd], BUFFER_SIZE);

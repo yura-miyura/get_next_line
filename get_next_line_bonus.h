@@ -31,7 +31,7 @@ void	*ft_memmove(void *dst, const void *src, size_t size);
 void	ft_bzero(void *s, size_t n);
 int		ft_indexof_nl(char *buffer);
 char	*get_next_line(int fd);
-char	*ft_strrchr(const char *s, int c);
+char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *s);
 
 #endif

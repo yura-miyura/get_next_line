@@ -33,5 +33,6 @@ int		ft_indexof_nl(char *buffer);
 char	*get_next_line(int fd);
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *s);
+void	*ft_calloc(size_t count, size_t size);
 
 #endif

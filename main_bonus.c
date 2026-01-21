@@ -19,21 +19,21 @@ int main(int ac, char **av)
 
 		printf("FD 1: %s", line);
 		printf("FD 2: %s", line2);
-		// while (line || line2)
-		// {
-		// 	if (line)
-		// 	{
-		// 		printf("FD 1: %s", line);
-		// 		free(line);
-		// 		line = get_next_line(fd);
-		// 	}
-		// 	if (line2)
-		// 	{
-		// 		printf("FD 2: %s", line2);
-		// 		free(line2);
-		// 		line2 = get_next_line(fd2);
-		// 	}
-		// }
+		while (line || line2)
+		{
+			if (line)
+			{
+				printf("FD 1: %s", line);
+				free(line);
+				line = get_next_line(fd);
+			}
+			if (line2)
+			{
+				printf("FD 2: %s", line2);
+				free(line2);
+				line2 = get_next_line(fd2);
+			}
+		}
 		free(line);
 		free(line2);
 		close(fd);

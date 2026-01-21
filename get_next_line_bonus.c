@@ -60,6 +60,22 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*memory;
+
+	if ((size != 0 && count > (SIZE_MAX / size)))
+		return (NULL);
+	memory = malloc(count * size);
+	if (!memory)
+	{
+		free(memory);
+		return (NULL);
+	}
+	ft_bzero(memory, count * size);
+	return (memory);
+}
+
 char	*ft_new_line(char *line, char *buffer)
 {
 	int		i;
@@ -79,12 +95,14 @@ char	*ft_new_line(char *line, char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[OPEN_MAX][BUFFER_SIZE + 1] = {0};
+	static char	*buffer[OPEN_MAX];
 	char		*line;
 	int			bytes;
 
 	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
+	if (!buffer[fd])
+		buffer[fd] = ft_calloc(BUFFER_SIZE + 1 , sizeof (char));
 	bytes = 1;
 	line = NULL;
 	while (bytes > 0 && !ft_strchr(line, '\n'))
@@ -93,5 +111,7 @@ char	*get_next_line(int fd)
 			bytes = read(fd, buffer[fd], BUFFER_SIZE);
 		line = ft_new_line(line, buffer[fd]);
 	}
+	if (!line || bytes < 0)
+		return (free(buffer[fd]), NULL);
 	return (line);
 }
